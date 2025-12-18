@@ -1,0 +1,20 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity full_adder4bit is
+port(
+	adderA : in std_logic;
+	adderB : in std_logic;
+	carryIn : in std_logic;
+	
+	adderOut : out std_logic;
+	carryOut : out std_logic
+);
+
+end logic 
+
+architecture adderLogic of full_adder_1bit is
+begin
+	carryOut <= ((adderA) AND (adderB)) OR ((carryIn) AND ((adderA) XOR (adderB)));
+	adderOut <= ((adderA) XOR (adderB)) XOR (carryIn);
+end adderLogic;

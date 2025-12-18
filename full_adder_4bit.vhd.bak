@@ -1,0 +1,64 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity full_adder4bit is
+port(
+	A : in std_logic_vector(3 downto 0);
+	B : in std_logic_vector(3 downto 0);
+	carryIn : in std_logic;
+
+	sum : out std_logic_vector(3 downto 0);
+	carryOut : out std_logic;
+);
+
+end full_adder_4bit;
+
+
+architecture adderLogic of full_adder_1bit is
+begin
+	component full_adder_1bit port(
+		bitA : in std_logic;
+		bitB : in std_logic;
+		adderCIn : in std_logic;
+		adderSOut : out std_logic;
+		adderCOut : out std_logic;
+	);
+	end component
+
+	signal carry : std_logic_vector(3 downto 0);
+
+
+	A0 : full_adder_1bit port map(
+		bitA => A(0),
+		bitB => B(0),
+		adderCIn : carryIn,
+		adderSOut : sum(0),
+		adderCOut : carryOut(0)
+
+	);
+
+	A1 : full_adder_1bit port map(
+		bitA => A(1),
+		bitB => B(1),
+		adderCIn : carryOut(0),
+		adderSOut : sum(1),
+		adderCOut : carryOut(1)
+	);
+
+	A2 : full_adder_1bit port map(
+		bitA => A(2),
+		bitB => B(2),
+		adderCIn : carryOut(1),
+		adderSOut : sum(2),
+		adderCOut : carryOut(2)
+	);
+	
+	A3 : full_adder_1bit port map(
+		bitA => A(3),
+		bitB => B(3),
+		adderCIn : carryOut(2),
+		adderSOut : sum(3),
+		adderCOut : carryOut(3)
+	);
+	
+end adderLogic;

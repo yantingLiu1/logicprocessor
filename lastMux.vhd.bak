@@ -1,0 +1,22 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity lastMux is
+port(
+	lastMux0, lastMux1 : in std_logic_vector(3 downto 0);
+	lastSelect: in std_logic;
+	lastOut: out std_logic_vector(3 downto 0)
+);
+
+end lastMux;
+
+architecture lastLogic of lastMux is
+
+begin 
+
+	-- for the multiplexing of four hex input busses
+
+	with lastSelect select
+	hex_out <= lastMux0 when "0",
+					lastMux1 when "1";
+end lastLogic;
